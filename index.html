@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safwan Sakib — Mechanical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#0a0c10;--bg2:#0f1218;--bg3:#151a22;
+  --border:rgba(80,160,255,0.13);--border2:rgba(80,160,255,0.28);
+  --blue:#4fa3ff;--cyan:#00d4ff;--orange:#ff6b35;--green:#00e5a0;
+  --text:#e8edf5;--muted:#6b7894;--dim:#9aa3b8;
+  --card:rgba(255,255,255,0.03);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;cursor:none;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(79,163,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(79,163,255,0.03) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+.cursor{width:7px;height:7px;background:var(--cyan);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:screen;transform:translate(-50%,-50%);}
+.cursor-ring{width:30px;height:30px;border:1px solid rgba(0,212,255,0.35);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.13s ease;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(10,12,16,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Space Mono',monospace;font-size:12px;color:var(--cyan);letter-spacing:.1em;text-decoration:none;cursor:none;}
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center;}
+.nav-links li button{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;background:none;border:none;cursor:none;padding:6px 10px;border-radius:2px;transition:color .2s;}
+.nav-links li button:hover{color:var(--cyan);}
+.nav-links li button.active{color:var(--cyan);background:rgba(0,212,255,0.07);}
+.nav-links li button.nav-cta{border:1px solid var(--border2);color:var(--cyan);}
+.nav-links li button.nav-cta:hover{background:rgba(0,212,255,0.1);}
+
+/* PAGE SYSTEM */
+.page{display:none;min-height:100vh;position:relative;z-index:1;opacity:0;transform:translateY(14px);transition:opacity .38s ease,transform .38s ease;}
+.page.active{display:block;}
+.page.visible{opacity:1;transform:translateY(0);}
+.pw{max-width:1100px;margin:0 auto;padding:110px 48px 80px;}
+
+/* Page header */
+.ph-tag{font-family:'Space Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.ph-tag::before{content:'';display:inline-block;width:28px;height:1px;background:var(--cyan);}
+.ph-title{font-size:clamp(38px,6vw,68px);font-weight:800;letter-spacing:-.03em;line-height:.94;margin-bottom:18px;}
+.ph-title span{color:transparent;-webkit-text-stroke:1px rgba(79,163,255,0.32);}
+.ph-sub{font-size:15px;color:var(--dim);line-height:1.8;max-width:580px;margin-bottom:56px;}
+
+/* Section label */
+.sec-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:.2em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px;}
+.sec-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* Buttons */
+.btn{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:11px 22px;border-radius:2px;text-decoration:none;transition:all .2s;cursor:none;display:inline-block;border:none;}
+.btn-pri{background:var(--cyan);color:var(--bg);font-weight:700;}
+.btn-pri:hover{background:#fff;}
+.btn-out{border:1px solid var(--border2);color:var(--dim);}
+.btn-out:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* Reveal */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+
+/* ─── HOME ─── */
+.hero-name{font-size:clamp(62px,10vw,118px);font-weight:800;line-height:.9;letter-spacing:-.03em;margin-bottom:26px;}
+.hero-name span{color:transparent;-webkit-text-stroke:1.5px rgba(79,163,255,0.28);}
+.hero-desc{font-size:17px;color:var(--dim);line-height:1.78;max-width:560px;margin-bottom:40px;}
+.hero-meta{display:flex;gap:36px;flex-wrap:wrap;margin-bottom:44px;}
+.mi{display:flex;flex-direction:column;gap:5px;}
+.mi-lbl{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;}
+.mi-val{font-size:15px;font-weight:700;}
+.mi-val.ac{color:var(--orange);}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.home-cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:64px;}
+.hc{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:26px 28px;cursor:none;transition:all .25s;position:relative;overflow:hidden;}
+.hc::after{content:'→';position:absolute;right:22px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:17px;transition:all .2s;}
+.hc:hover{border-color:var(--border2);transform:translateY(-2px);}
+.hc:hover::after{color:var(--cyan);right:16px;}
+.hc-num{font-family:'Space Mono',monospace;font-size:9px;color:var(--cyan);margin-bottom:9px;letter-spacing:.1em;}
+.hc-title{font-size:17px;font-weight:700;margin-bottom:5px;}
+.hc-sub{font-size:12px;color:var(--muted);}
+
+/* ─── ABOUT ─── */
+.about-two{display:grid;grid-template-columns:1.2fr 1fr;gap:64px;align-items:start;}
+.about-text p{font-size:14px;color:var(--dim);line-height:1.85;margin-bottom:16px;}
+.about-text p strong{color:var(--text);font-weight:600;}
+.r-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px;}
+.rtag{font-family:'Space Mono',monospace;font-size:9px;padding:5px 10px;border:1px solid var(--border);border-radius:2px;color:var(--muted);letter-spacing:.05em;transition:all .2s;}
+.rtag:hover{border-color:var(--cyan);color:var(--cyan);}
+.about-stats{display:flex;flex-direction:column;gap:14px;}
+.s-row{padding:20px 22px;background:var(--card);border:1px solid var(--border);border-radius:4px;display:flex;justify-content:space-between;align-items:center;}
+.s-val{font-size:32px;font-weight:800;color:var(--cyan);font-family:'Space Mono',monospace;}
+.s-desc{font-size:11px;color:var(--muted);text-align:right;max-width:170px;line-height:1.5;}
+
+/* ─── EDUCATION ─── */
+.edu-tl{display:flex;flex-direction:column;gap:0;}
+.edu-item{display:flex;gap:28px;position:relative;padding-bottom:32px;}
+.edu-item:last-child{padding-bottom:0;}
+.edu-dc{display:flex;flex-direction:column;align-items:center;width:18px;flex-shrink:0;padding-top:5px;}
+.edu-dot{width:11px;height:11px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);flex-shrink:0;}
+.edu-line{flex:1;width:1px;background:var(--border);margin-top:5px;}
+.edu-body{flex:1;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap;}
+.edu-deg{font-size:17px;font-weight:700;margin-bottom:5px;}
+.edu-sch{font-size:12px;color:var(--dim);}
+.edu-r{text-align:right;}
+.edu-yr{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:5px;}
+.edu-gpa{font-family:'Space Mono',monospace;font-size:22px;color:var(--cyan);font-weight:700;}
+.edu-gpa-l{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;}
+
+/* ─── SKILLS ─── */
+.sk-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;}
+.sk-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:24px;transition:border-color .2s,transform .2s;}
+.sk-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.sk-title{font-family:'Space Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px;}
+.sk-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.sk-p{font-size:12px;color:var(--dim);background:rgba(255,255,255,0.04);padding:5px 10px;border-radius:2px;border:1px solid transparent;transition:all .2s;}
+.sk-p:hover{border-color:var(--border);color:var(--text);}
+.sk-p.cert{border-color:rgba(0,229,160,0.3);color:var(--green);}
+
+/* ─── PROJECTS ─── */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:20px;}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:28px;transition:all .25s;position:relative;overflow:hidden;}
+.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--blue));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.proj-card:hover::before{transform:scaleX(1);}
+.proj-card:hover{border-color:rgba(79,163,255,0.3);transform:translateY(-3px);}
+.proj-period{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:9px;}
+.proj-name{font-size:19px;font-weight:700;margin-bottom:4px;letter-spacing:-.01em;}
+.proj-team{font-size:10px;color:var(--cyan);margin-bottom:13px;font-family:'Space Mono',monospace;letter-spacing:.04em;}
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.proj-tools{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px;}
+.tt{font-family:'Space Mono',monospace;font-size:9px;padding:3px 7px;border:1px solid var(--border);border-radius:2px;color:var(--muted);letter-spacing:.04em;}
+.proj-links{display:flex;gap:8px;flex-wrap:wrap;}
+.pl{font-family:'Space Mono',monospace;font-size:10px;padding:6px 12px;border:1px solid var(--border2);border-radius:2px;color:var(--cyan);text-decoration:none;letter-spacing:.06em;transition:all .2s;cursor:none;}
+.pl:hover{background:rgba(0,212,255,0.1);}
+
+/* ─── PUBLICATIONS ─── */
+.pub-list{display:flex;flex-direction:column;gap:18px;}
+.pub-card{padding:26px 30px;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--cyan);border-radius:0 4px 4px 0;transition:background .2s;}
+.pub-card:hover{background:rgba(79,163,255,0.04);}
+.pub-title{font-size:15px;font-weight:600;line-height:1.55;margin-bottom:8px;}
+.pub-venue{font-family:'Space Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.04em;margin-bottom:8px;}
+.pub-authors{font-size:11px;color:var(--muted);line-height:1.6;}
+
+/* ─── AWARDS ─── */
+.aw-list{display:flex;flex-direction:column;gap:12px;}
+.aw-row{display:flex;align-items:center;gap:18px;padding:18px 24px;background:var(--card);border:1px solid var(--border);border-radius:4px;transition:border-color .2s;}
+.aw-row:hover{border-color:rgba(255,107,53,0.35);}
+.aw-icon{font-size:20px;flex-shrink:0;}
+.aw-info{flex:1;}
+.aw-title{font-size:14px;font-weight:600;margin-bottom:3px;}
+.aw-sub{font-size:10px;color:var(--muted);font-family:'Space Mono',monospace;letter-spacing:.03em;}
+.aw-badge{background:rgba(255,107,53,0.12);color:var(--orange);font-family:'Space Mono',monospace;font-size:9px;padding:3px 8px;border-radius:2px;white-space:nowrap;letter-spacing:.06em;}
+.aw-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;}
+
+/* ─── LEADERSHIP ─── */
+.lead-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
+.lead-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:22px;transition:all .2s;}
+.lead-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.lead-role{font-size:15px;font-weight:700;margin-bottom:3px;}
+.lead-org{font-family:'Space Mono',monospace;font-size:9px;color:var(--cyan);margin-bottom:5px;letter-spacing:.04em;}
+.lead-period{font-family:'Space Mono',monospace;font-size:8px;color:var(--muted);margin-bottom:11px;}
+.lead-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+
+/* ─── CERTIFICATIONS ─── */
+.cert-list{display:flex;flex-direction:column;gap:12px;}
+.cert-row{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 24px;background:var(--card);border:1px solid var(--border);border-radius:4px;transition:border-color .2s;flex-wrap:wrap;}
+.cert-row:hover{border-color:var(--border2);}
+.cert-name{font-size:14px;font-weight:600;margin-bottom:3px;}
+.cert-issuer{font-family:'Space Mono',monospace;font-size:10px;color:var(--cyan);letter-spacing:.03em;}
+.cert-r{display:flex;align-items:center;gap:12px;}
+.cert-date{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);}
+.cert-link{font-family:'Space Mono',monospace;font-size:9px;padding:5px 11px;border:1px solid var(--border2);border-radius:2px;color:var(--cyan);text-decoration:none;letter-spacing:.06em;transition:all .2s;cursor:none;white-space:nowrap;}
+.cert-link:hover{background:rgba(0,212,255,0.1);}
+
+/* ─── CONTACT ─── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}
+.contact-intro{font-size:14px;color:var(--dim);line-height:1.85;margin-bottom:32px;}
+.c-links{display:flex;flex-direction:column;gap:9px;}
+.c-link{display:flex;align-items:center;gap:14px;padding:13px 18px;background:var(--card);border:1px solid var(--border);border-radius:4px;text-decoration:none;color:var(--dim);font-family:'Space Mono',monospace;font-size:10px;transition:all .2s;cursor:none;}
+.c-link:hover{border-color:var(--cyan);color:var(--cyan);}
+.c-icon{width:16px;text-align:center;font-style:normal;flex-shrink:0;}
+.refs-title{font-family:'Space Mono',monospace;font-size:9px;color:var(--cyan);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px;}
+.ref-card{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:18px 22px;margin-bottom:12px;}
+.ref-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+.ref-title{font-size:10px;color:var(--cyan);margin-bottom:9px;font-family:'Space Mono',monospace;}
+.ref-ct{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);line-height:1.9;}
+.ref-ct a{color:var(--muted);text-decoration:none;transition:color .2s;}
+.ref-ct a:hover{color:var(--cyan);}
+.addr-box{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);line-height:1.9;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:16px 20px;}
+
+footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;}
+.fc{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);}
+.fn{font-family:'Space Mono',monospace;font-size:10px;color:var(--cyan);}
+
+@media(max-width:860px){
+  nav{padding:14px 20px;}
+  .nav-links{gap:2px;}
+  .nav-links li button{font-size:9px;padding:5px 7px;}
+  .pw{padding:96px 22px 60px;}
+  .about-two,.contact-grid{grid-template-columns:1fr;gap:36px;}
+  .home-cards{grid-template-columns:1fr;}
+  footer{padding:18px 22px;flex-direction:column;gap:6px;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="rng"></div>
+
+<nav>
+  <a class="nav-logo" onclick="go('home')">// SAFWAN SAKIB</a>
+  <ul class="nav-links">
+    <li><button onclick="go('home')" id="n-home">Home</button></li>
+    <li><button onclick="go('about')" id="n-about">About</button></li>
+    <li><button onclick="go('skills')" id="n-skills">Skills</button></li>
+    <li><button onclick="go('projects')" id="n-projects">Projects</button></li>
+    <li><button onclick="go('publications')" id="n-publications">Papers</button></li>
+    <li><button onclick="go('awards')" id="n-awards">Awards</button></li>
+    <li><button onclick="go('leadership')" id="n-leadership">Leadership</button></li>
+    <li><button onclick="go('certifications')" id="n-certifications">Certs</button></li>
+    <li><button onclick="go('contact')" id="n-contact" class="nav-cta">Contact</button></li>
+  </ul>
+</nav>
+
+<!-- HOME -->
+<div class="page" id="p-home">
+<div class="pw">
+  <div class="ph-tag">Mechanical Engineering · BUET · 8th Semester</div>
+  <h1 class="hero-name">SAFWAN<br><span>SAKIB</span></h1>
+  <p class="hero-desc">Robotics engineer, rover builder &amp; CAD champion. Designing machines that push boundaries — from gecko-inspired climbing robots to Mars rovers competing on the world stage.</p>
+  <div class="hero-meta">
+    <div class="mi"><span class="mi-lbl">CGPA</span><span class="mi-val ac">3.80 / 4.00</span></div>
+    <div class="mi"><span class="mi-lbl">University</span><span class="mi-val">BUET</span></div>
+    <div class="mi"><span class="mi-lbl">Location</span><span class="mi-val">Dhaka, Bangladesh</span></div>
+    <div class="mi"><span class="mi-lbl">Status</span><span class="mi-val">Open to Opportunities</span></div>
+  </div>
+  <div class="hero-btns">
+    <button class="btn btn-pri" onclick="go('projects')">View Projects</button>
+    <button class="btn btn-out" onclick="go('contact')">Get In Touch</button>
+    <a class="btn btn-out" href="mailto:ssakib427@gmail.com">Email Me</a>
+  </div>
+  <div class="home-cards">
+    <div class="hc rv" onclick="go('about')"><div class="hc-num">01 — ABOUT</div><div class="hc-title">Who I Am</div><div class="hc-sub">Background, research interests &amp; education</div></div>
+    <div class="hc rv" onclick="go('projects')"><div class="hc-num">04 — PROJECTS</div><div class="hc-title">Notable Projects</div><div class="hc-sub">7 major engineering builds including Mars rovers &amp; robots</div></div>
+    <div class="hc rv" onclick="go('awards')"><div class="hc-num">06 — AWARDS</div><div class="hc-title">Awards &amp; Honors</div><div class="hc-sub">3× champion + international rover competition results</div></div>
+    <div class="hc rv" onclick="go('leadership')"><div class="hc-num">07 — LEADERSHIP</div><div class="hc-title">Leadership Roles</div><div class="hc-sub">President, VP &amp; Head of Operations across 7 teams</div></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib · All rights reserved</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="p-about">
+<div class="pw">
+  <div class="ph-tag">01 — About Me</div>
+  <h1 class="ph-title">The Engineer<br><span>Behind the Work</span></h1>
+  <p class="ph-sub">A curious mind driven by the challenge of building real, functional systems from first principles.</p>
+  <div class="about-two">
+    <div class="about-text">
+      <p>I'm <strong>Safwan Sakib</strong>, an undergraduate Mechanical Engineering student at <strong>Bangladesh University of Engineering and Technology (BUET)</strong>, currently in my 8th semester with a CGPA of <strong>3.80/4.00</strong>.</p>
+      <p>I thrive at the intersection of <strong>robotics, structural design, and simulation</strong>. From leading a Mars rover team to international competitions across three continents, to designing a gecko-inspired vertical climbing robot — I turn bold concepts into physical systems that work under pressure.</p>
+      <p>Beyond engineering, I hold leadership positions across <strong>seven student clubs and teams</strong>, from President of the Automobile Club to Head of Operations at Team Interplanetar. I believe great engineers are also great communicators, organizers, and collaborators.</p>
+      <p>My research interests span <strong>robotics, additive manufacturing, structural mechanics, convection heat transfer, and solar renewable energy</strong> — all grounded in rigorous CAD modeling and FEA simulation.</p>
+      <div class="r-tags">
+        <span class="rtag">Robotics</span>
+        <span class="rtag">Additive Manufacturing</span>
+        <span class="rtag">Structural Mechanics</span>
+        <span class="rtag">Convection Heat Transfer</span>
+        <span class="rtag">Solar Renewable Energy</span>
+        <span class="rtag">Design &amp; Manufacturing</span>
+      </div>
+    </div>
+    <div class="about-stats">
+      <div class="s-row rv"><span class="s-val">3.80</span><span class="s-desc">CGPA at BUET Mechanical Engineering</span></div>
+      <div class="s-row rv"><span class="s-val">4+</span><span class="s-desc">International rover competitions on 3 continents</span></div>
+      <div class="s-row rv"><span class="s-val">3×</span><span class="s-desc">Champion in BUET-level competitions in 2024</span></div>
+      <div class="s-row rv"><span class="s-val">2</span><span class="s-desc">Conference papers published in 2024</span></div>
+      <div class="s-row rv"><span class="s-val">7</span><span class="s-desc">Active leadership roles across clubs &amp; teams</span></div>
+    </div>
+  </div>
+  <div style="margin-top:64px;">
+    <div class="sec-lbl">Education</div>
+    <div class="edu-tl">
+      <div class="edu-item rv">
+        <div class="edu-dc"><div class="edu-dot"></div><div class="edu-line"></div></div>
+        <div class="edu-body">
+          <div><div class="edu-deg">B.Sc. in Mechanical Engineering</div><div class="edu-sch">Bangladesh University of Engineering and Technology (BUET) · 8th Semester</div></div>
+          <div class="edu-r"><div class="edu-yr">Jan 2021 — Mar 2026 (expected)</div><div class="edu-gpa">3.80</div><div class="edu-gpa-l">CGPA / 4.00</div></div>
+        </div>
+      </div>
+      <div class="edu-item rv">
+        <div class="edu-dc"><div class="edu-dot"></div><div class="edu-line"></div></div>
+        <div class="edu-body">
+          <div><div class="edu-deg">Higher Secondary School Certificate</div><div class="edu-sch">Notre Dame College · Dhaka Board</div></div>
+          <div class="edu-r"><div class="edu-yr">2020</div><div class="edu-gpa">5.00</div><div class="edu-gpa-l">GPA / 5.00</div></div>
+        </div>
+      </div>
+      <div class="edu-item rv">
+        <div class="edu-dc"><div class="edu-dot"></div><div class="edu-line"></div></div>
+        <div class="edu-body">
+          <div><div class="edu-deg">Secondary School Certificate</div><div class="edu-sch">Dhaka Residential Model College · Dhaka Board</div></div>
+          <div class="edu-r"><div class="edu-yr">2018</div><div class="edu-gpa">5.00</div><div class="edu-gpa-l">GPA / 5.00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- SKILLS -->
+<div class="page" id="p-skills">
+<div class="pw">
+  <div class="ph-tag">03 — Technical Skills</div>
+  <h1 class="ph-title">Tools &amp;<br><span>Technologies</span></h1>
+  <p class="ph-sub">A versatile toolkit spanning CAD, simulation, programming, and creative software — built through hands-on project work.</p>
+  <div class="sk-grid">
+    <div class="sk-card rv"><div class="sk-title">CAD &amp; Design</div><div class="sk-pills"><span class="sk-p cert">SolidWorks ✦ CSWP</span><span class="sk-p">AutoCAD</span><span class="sk-p">Blender</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">Simulation &amp; FEA</div><div class="sk-pills"><span class="sk-p">ANSYS</span><span class="sk-p">ANSYS Fluent</span><span class="sk-p">SW Simulation</span><span class="sk-p">COMSOL Multiphysics</span><span class="sk-p">Tecplot 360 EX</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">Programming</div><div class="sk-pills"><span class="sk-p">Python</span><span class="sk-p">MATLAB</span><span class="sk-p">C / C++</span><span class="sk-p">Arduino IDE</span><span class="sk-p">LaTeX</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">AI &amp; Computer Vision</div><div class="sk-pills"><span class="sk-p">OpenCV</span><span class="sk-p">Machine Learning</span><span class="sk-p">Image Processing</span><span class="sk-p">Video Processing</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">Graphics &amp; Media</div><div class="sk-pills"><span class="sk-p">Adobe Illustrator</span><span class="sk-p">Adobe Photoshop</span><span class="sk-p">Canva</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">App Development</div><div class="sk-pills"><span class="sk-p">Flutter (Basics)</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">Microsoft Office</div><div class="sk-pills"><span class="sk-p">Word</span><span class="sk-p">PowerPoint</span><span class="sk-p">Excel</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">Soft Skills</div><div class="sk-pills"><span class="sk-p">Public Speaking</span><span class="sk-p">Event Management</span><span class="sk-p">Academic Writing</span><span class="sk-p">Sketching</span><span class="sk-p">Organizing Tasks</span></div></div>
+    <div class="sk-card rv"><div class="sk-title">Languages</div><div class="sk-pills"><span class="sk-p">Bengali — Native</span><span class="sk-p">English — Proficient</span></div></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- PROJECTS -->
+<div class="page" id="p-projects">
+<div class="pw">
+  <div class="ph-tag">04 — Notable Projects</div>
+  <h1 class="ph-title">Engineering<br><span>Builds</span></h1>
+  <p class="ph-sub">From Mars rovers to gecko-inspired robots — real systems designed, simulated, and deployed in competition.</p>
+  <div class="proj-grid">
+
+    <div class="proj-card rv">
+      <div class="proj-period">Oct 2024 — Present</div>
+      <div class="proj-name">Project XVI</div>
+      <div class="proj-team">Team Interplanetar · BUET Mars Rover · 2025 Challenges</div>
+      <div class="proj-desc">6th generation BUET Mars Rover — a complete redesign of all systems with the latest technologies. Leading the Technical division: Wheel, Suspension, Steering, Wrist, and Science Tools.</div>
+      <div class="proj-tools"><span class="tt">SolidWorks</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://interplanetar.buet.ac.bd" target="_blank">Team Site ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card rv">
+      <div class="proj-period">Nov 2022 — Sep 2024</div>
+      <div class="proj-name">Prochesta V1 | V2 | V3</div>
+      <div class="proj-team">Team Interplanetar · URC23 | ARC23 | ERC23 | ARC24 | ERC24</div>
+      <div class="proj-desc">5th generation BUET rover — lighter, more functional, with better space budget. Modular arm and science tool designed, simulated, and manufactured from scratch.</div>
+      <div class="proj-tools"><span class="tt">SolidWorks</span><span class="tt">ANSYS</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://github.com/safwansakib/prochesta" target="_blank">Project Link ↗</a>
+        <a class="pl" href="https://interplanetar.buet.ac.bd/rovers" target="_blank">Team Page ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card rv">
+      <div class="proj-period">Nov 2023 — Mar 2024</div>
+      <div class="proj-name">ROCKO</div>
+      <div class="proj-team">Gecko-Inspired Climbing Robot · Electromechanics</div>
+      <div class="proj-desc">Vertical climbing robot inspired by gecko locomotion using suction cups and a rhythmic four-leg movement mechanism. Integrated Arduino Nano, ESP32 CAM, HC-06 Bluetooth, and custom PCBs — enabling video surveillance, object detection, and defect identification.</div>
+      <div class="proj-tools"><span class="tt">SolidWorks</span><span class="tt">OpenCV</span><span class="tt">Python</span><span class="tt">MATLAB</span><span class="tt">Arduino IDE</span><span class="tt">ESP32 CAM</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://drive.google.com/file/d/rocko-poster/view" target="_blank">Poster ↗</a>
+        <a class="pl" href="https://github.com/safwansakib/rocko" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card rv">
+      <div class="proj-period">Nov 2021 — Present</div>
+      <div class="proj-name">Formula Student Racecar</div>
+      <div class="proj-team">Automaestro · BUET Formula Student Team · FSUK22 | FB23</div>
+      <div class="proj-desc">First Formula Student racecar chassis at BUET. Designed chassis, steering system, and seat in SolidWorks; performed structural analysis using SolidWorks Simulation and ANSYS; led manufacturing.</div>
+      <div class="proj-tools"><span class="tt">SolidWorks</span><span class="tt">ANSYS</span><span class="tt">SW Simulation</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://automaestro.buet.ac.bd" target="_blank">Project Link ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card rv">
+      <div class="proj-period">Sep 2024 — Dec 2024</div>
+      <div class="proj-name">Parabolic Trough Solar Collector</div>
+      <div class="proj-team">Thermo-fluid System · Heat Transfer Research</div>
+      <div class="proj-desc">Designed and simulated a Parabolic Trough Solar Collector with PCM-based thermal storage using ANSYS, SolidWorks Simulation, and other tools to enhance energy efficiency and sustainability.</div>
+      <div class="proj-tools"><span class="tt">ANSYS Fluent</span><span class="tt">SolidWorks</span><span class="tt">Tecplot 360 EX</span><span class="tt">MATLAB</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://github.com/safwansakib/solar-trough" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card rv">
+      <div class="proj-period">Jul 2023 — Mar 2024</div>
+      <div class="proj-name">Advanced Line Following Robot</div>
+      <div class="proj-team">Team Nuvola · BUET Robotics Society</div>
+      <div class="proj-desc">Custom PCB and sensor boards with PID algorithm implementation. Arduino microcontroller analyzes sensor logic and makes real-time decisions to follow lines with high precision.</div>
+      <div class="proj-tools"><span class="tt">Arduino</span><span class="tt">PCB Design</span><span class="tt">PID Algorithm</span><span class="tt">C++</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://github.com/safwansakib/line-follower" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="proj-card rv">
+      <div class="proj-period">Jan 2024 — Present</div>
+      <div class="proj-name">Micro Mouse</div>
+      <div class="proj-team">Team Nuvola · BUET Robotics Society</div>
+      <div class="proj-desc">Autonomous maze-solving robot using pathfinding algorithms and sensor-based navigation. Real-time obstacle detection, shortest-path optimization, and autonomous decision-making.</div>
+      <div class="proj-tools"><span class="tt">Arduino</span><span class="tt">Motor Drivers</span><span class="tt">Pathfinding Algorithms</span><span class="tt">C++</span></div>
+      <div class="proj-links">
+        <a class="pl" href="https://github.com/safwansakib/micromouse" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="page" id="p-publications">
+<div class="pw">
+  <div class="ph-tag">05 — Publications</div>
+  <h1 class="ph-title">Conference<br><span>Papers</span></h1>
+  <p class="ph-sub">Peer-reviewed research presented at national and international engineering conferences in 2024.</p>
+  <div class="pub-list">
+    <div class="pub-card rv">
+      <div class="pub-title">Design and Fabrication of a Rover Prototype by Team Interplanetar: Application Ranging From Space to Defense</div>
+      <div class="pub-venue">Bangladesh Navy Conference 2024</div>
+      <div class="pub-authors">S. U. Rauf, M. A. R. Nishat, <strong>S. Sakib</strong>, M. A. Hassan, N. P. Jaman, I. M. Khan, M. A. Mumtahin, M. Amin, K. A. Rahman</div>
+      <div style="margin-top:14px;"><a class="pl" href="https://navyconference.bd/2024/proceedings" target="_blank">Conference ↗</a></div>
+    </div>
+    <div class="pub-card rv">
+      <div class="pub-title">Entropy Generation Analysis in a Ferrofluid filled Stepped Grooved Square Cavity Undergoing MHD and Joule Heating Effects and Featuring a Vertically Oscillating Cylinder</div>
+      <div class="pub-venue">9th BSME International Conference on Thermal Engineering, 2024</div>
+      <div class="pub-authors">M. A. Ahamed, D. J. Ritu, <strong>S. Sakib</strong>, S. Dhaulat, S. Saha</div>
+      <div style="margin-top:14px;"><a class="pl" href="https://bsme.org.bd/conference/thermal-2024" target="_blank">Conference ↗</a></div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- AWARDS -->
+<div class="page" id="p-awards">
+<div class="pw">
+  <div class="ph-tag">06 — Awards &amp; Honors</div>
+  <h1 class="ph-title">Achievements<br><span>Worldwide</span></h1>
+  <p class="ph-sub">From national CAD championships to international rover competitions across three continents.</p>
+  <div class="aw-list">
+    <div class="aw-row rv"><span class="aw-icon">🏆</span><div class="aw-info"><div class="aw-title">Champion — CAD Clash: Inter University CAD Competition</div><div class="aw-sub">Mecha Fest 2023 · BUET</div></div><span class="aw-badge">CHAMPION</span><span class="aw-date">Feb 2024</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🏆</span><div class="aw-info"><div class="aw-title">Champion — Project Showcase</div><div class="aw-sub">EEE Day 2024 · BUET</div></div><span class="aw-badge">CHAMPION</span><span class="aw-date">Dec 2024</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🏆</span><div class="aw-info"><div class="aw-title">Champion — Project Showcase, Robo Carnival 2024</div><div class="aw-sub">BUET Robotics Society · BUET</div></div><span class="aw-badge">CHAMPION</span><span class="aw-date">Dec 2024</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🌍</span><div class="aw-info"><div class="aw-title">European Rover Challenge — 24th / 69 Teams</div><div class="aw-sub">Kielce, Poland · Onsite Edition</div></div><span class="aw-date">Sep 2024</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🚀</span><div class="aw-info"><div class="aw-title">University Rover Challenge — 26th / 104 Teams</div><div class="aw-sub">MDRS, Utah, USA</div></div><span class="aw-date">Jun 2023</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🌐</span><div class="aw-info"><div class="aw-title">Anatolian Rover Challenge — 1st Seed Qualification</div><div class="aw-sub">Ankara, Türkiye</div></div><span class="aw-date">Jul 2023</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🌐</span><div class="aw-info"><div class="aw-title">Anatolian Rover Challenge — 2nd Seed Qualification</div><div class="aw-sub">Ankara, Türkiye</div></div><span class="aw-date">Jul 2024</span></div>
+    <div class="aw-row rv"><span class="aw-icon">🌏</span><div class="aw-info"><div class="aw-title">International Rover Design Challenge — 15th Position</div><div class="aw-sub">India</div></div><span class="aw-date">Jul 2023</span></div>
+    <div class="aw-row rv"><span class="aw-icon">⚗️</span><div class="aw-info"><div class="aw-title">Honorable Mention — 53rd International Chemistry Olympiad</div><div class="aw-sub">Tokyo, Japan 2021</div></div><span class="aw-date">2021</span></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- LEADERSHIP -->
+<div class="page" id="p-leadership">
+<div class="pw">
+  <div class="ph-tag">07 — Leadership &amp; Extra-Curricular</div>
+  <h1 class="ph-title">Roles &amp;<br><span>Responsibilities</span></h1>
+  <p class="ph-sub">Seven concurrent leadership roles spanning rover teams, automobile clubs, robotics societies, and engineering chapters.</p>
+  <div class="lead-grid">
+    <div class="lead-card rv"><div class="lead-role">Head of Operations</div><div class="lead-org">Team Interplanetar · BUET Mars Rover</div><div class="lead-period">Nov 2022 — Present</div><div class="lead-desc">Directed mechanical design, fabrication, and assembly of rover components. Spearheaded R&amp;D on manufacturing techniques. Led team in 4+ international competitions worldwide.</div></div>
+    <div class="lead-card rv"><div class="lead-role">President</div><div class="lead-org">BUET Automobile Club</div><div class="lead-period">Oct 2022 — Present</div><div class="lead-desc">Conducted workshops and skill development seminars. Organized Auto Fest 2024 and other events.</div></div>
+    <div class="lead-card rv"><div class="lead-role">Vice President</div><div class="lead-org">BUET Robotics Society</div><div class="lead-period">Oct 2022 — Present</div><div class="lead-desc">Arranged and instructed multiple workshops on Basic Arduino Programming and robotics projects. Organized Robo Carnival 2023 and 2024.</div></div>
+    <div class="lead-card rv"><div class="lead-role">Electronics Subteam Lead</div><div class="lead-org">Automaestro · BUET Formula Student Team</div><div class="lead-period">Mar 2023 — Present</div><div class="lead-desc">Contributing in mechanical designs and manufacturing of subsystems for a Formula Student vehicle (FSUK22, FB23).</div></div>
+    <div class="lead-card rv"><div class="lead-role">Treasurer</div><div class="lead-org">ASHRAE BUET Student Branch</div><div class="lead-period">Jul 2024 — Present</div><div class="lead-desc">Arranged seminars and collaborated with ASHRAE Bangladesh Chapter. Attended industrial visit at Elite Hi-Tech Ind. Ltd.</div></div>
+    <div class="lead-card rv"><div class="lead-role">Vice Chair</div><div class="lead-org">IMechE BUET Student Chapter</div><div class="lead-period">Jan 2023 — Present</div><div class="lead-desc">Graphics and digital content designer. Arranged workshops on drone basics and programming.</div></div>
+    <div class="lead-card rv"><div class="lead-role">Vice President</div><div class="lead-org">BUET Career Club</div><div class="lead-period">Sep 2022 — Present</div><div class="lead-desc">Graphics and digital content designer. Organized Career Carnival 2024.</div></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- CERTIFICATIONS -->
+<div class="page" id="p-certifications">
+<div class="pw">
+  <div class="ph-tag">08 — Certificates &amp; Licenses</div>
+  <h1 class="ph-title">Credentials &amp;<br><span>Certifications</span></h1>
+  <p class="ph-sub">Verified professional credentials in CAD, simulation, and machine learning from globally recognized institutions.</p>
+  <div class="cert-list">
+    <div class="cert-row rv">
+      <div><div class="cert-name">Certified SolidWorks CAD Professional (CSWP)</div><div class="cert-issuer">Mechanical Design · Dassault Systèmes SolidWorks</div></div>
+      <div class="cert-r"><span class="cert-date">Jul 2024</span><a class="cert-link" href="https://www.solidworks.com/sw/support/validatecerts.htm" target="_blank">Verify ↗</a></div>
+    </div>
+    <div class="cert-row rv">
+      <div><div class="cert-name">SolidWorks Sheet Metal Professional</div><div class="cert-issuer">Dassault Systèmes SolidWorks</div></div>
+      <div class="cert-r"><span class="cert-date">Jul 2024</span><a class="cert-link" href="https://www.solidworks.com/sw/support/validatecerts.htm" target="_blank">Verify ↗</a></div>
+    </div>
+    <div class="cert-row rv">
+      <div><div class="cert-name">SolidWorks Simulations Associate</div><div class="cert-issuer">Dassault Systèmes SolidWorks</div></div>
+      <div class="cert-r"><span class="cert-date">Sep 2024</span><a class="cert-link" href="https://www.solidworks.com/sw/support/validatecerts.htm" target="_blank">Verify ↗</a></div>
+    </div>
+    <div class="cert-row rv">
+      <div><div class="cert-name">Supervised Machine Learning</div><div class="cert-issuer">Coursera · DeepLearning.AI &amp; Stanford University</div></div>
+      <div class="cert-r"><span class="cert-date">Nov 2024</span><a class="cert-link" href="https://www.coursera.org/account/accomplishments/verify/safwansakib" target="_blank">Verify ↗</a></div>
+    </div>
+    <div class="cert-row rv">
+      <div><div class="cert-name">Instructor — Interplanetar Workshop 2023</div><div class="cert-issuer">Team Interplanetar · BUET</div></div>
+      <div class="cert-r"><span class="cert-date">Jan 2024</span><a class="cert-link" href="https://interplanetar.buet.ac.bd/workshop2023/cert" target="_blank">Verify ↗</a></div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="p-contact">
+<div class="pw">
+  <div class="ph-tag">09 — Contact</div>
+  <h1 class="ph-title">Let's<br><span>Connect</span></h1>
+  <p class="ph-sub">Open to research collaborations, internships, and engineering opportunities. Based in Dhaka — available worldwide remotely.</p>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-intro">Whether you want to discuss robotics, rover design, thermal systems, or just say hello — I'm always happy to connect. Reach out via any of the channels below.</p>
+      <div class="sec-lbl" style="margin-bottom:14px;">Direct Links</div>
+      <div class="c-links">
+        <a class="c-link" href="mailto:ssakib427@gmail.com"><i class="c-icon">✉</i> ssakib427@gmail.com</a>
+        <a class="c-link" href="mailto:2010046@me.buet.ac.bd"><i class="c-icon">🎓</i> 2010046@me.buet.ac.bd</a>
+        <a class="c-link" href="tel:+8801957524840"><i class="c-icon">📱</i> (+880) 1957524840</a>
+        <a class="c-link" href="https://www.linkedin.com/in/safwansakib" target="_blank"><i class="c-icon">in</i> linkedin.com/in/safwansakib</a>
+        <a class="c-link" href="https://www.facebook.com/safwan.sakib.buet" target="_blank"><i class="c-icon">f</i> facebook.com/safwan.sakib.buet</a>
+        <a class="c-link" href="https://github.com/safwansakib" target="_blank"><i class="c-icon">⌥</i> github.com/safwansakib</a>
+      </div>
+      <div style="margin-top:24px;">
+        <div class="sec-lbl" style="margin-bottom:14px;">Address</div>
+        <div class="addr-box">House #15/1, Road #02<br>Ali and Noor Real Estate<br>Mohammadpur, Dhaka<br>Bangladesh</div>
+      </div>
+    </div>
+    <div>
+      <div class="refs-title">Academic References</div>
+      <div class="ref-card rv">
+        <div class="ref-name">Dr. Mohammad Ali</div>
+        <div class="ref-title">Academic Advisor · Professor, ME Dept, BUET</div>
+        <div class="ref-ct">📞 <a href="tel:+8801732194776">+8801732194776</a><br>✉ <a href="mailto:mali@me.buet.ac.bd">mali@me.buet.ac.bd</a></div>
+      </div>
+      <div class="ref-card rv">
+        <div class="ref-name">Dr. Md. Ashiqur Rahman</div>
+        <div class="ref-title">Moderator, Team Interplanetar · Professor, ME Dept, BUET</div>
+        <div class="ref-ct">📞 <a href="tel:+8801712274887">+8801712274887</a><br>✉ <a href="mailto:ashiqurrahman@me.buet.ac.bd">ashiqurrahman@me.buet.ac.bd</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">MECHANICAL ENGINEER · BUET</span></footer>
+</div>
+
+<script>
+// Cursor
+const cur=document.getElementById('cur'),rng=document.getElementById('rng');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;rng.style.left=rx+'px';rng.style.top=ry+'px';requestAnimationFrame(anim);})();
+
+// Router
+const IDS=['home','about','skills','projects','publications','awards','leadership','certifications','contact'];
+let cur_pg='home';
+
+function go(id){
+  if(!IDS.includes(id)||id===cur_pg)return;
+  const old=document.getElementById('p-'+cur_pg);
+  old.classList.remove('visible');
+  setTimeout(()=>old.classList.remove('active'),320);
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  const nb=document.getElementById('n-'+id);
+  if(nb)nb.classList.add('active');
+  cur_pg=id;
+  const next=document.getElementById('p-'+id);
+  next.classList.add('active');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    next.classList.add('visible');
+    window.scrollTo({top:0,behavior:'smooth'});
+    reveal(next);
+  }));
+}
+
+function reveal(pg){
+  const els=pg.querySelectorAll('.rv');
+  els.forEach(e=>e.classList.remove('on'));
+  setTimeout(()=>{
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
+    },{threshold:0.07});
+    els.forEach(e=>obs.observe(e));
+  },80);
+}
+
+// Init
+const start=document.getElementById('p-home');
+start.classList.add('active');
+document.getElementById('n-home').classList.add('active');
+requestAnimationFrame(()=>requestAnimationFrame(()=>{start.classList.add('visible');reveal(start);}));
+</script>
+</body>
+</html>
