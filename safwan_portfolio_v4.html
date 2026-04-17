@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Safwan Sakib — Mechanical Engineer & Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--tr:background 0.35s ease,color 0.35s ease,border-color 0.35s ease;}
+[data-theme="dark"]{--bg:#0a0f0f;--bg2:#0e1514;--bg3:#131d1c;--sf:rgba(255,255,255,0.035);--sf2:rgba(255,255,255,0.07);--bd:rgba(20,184,166,0.15);--bd2:rgba(20,184,166,0.35);--tx:#e0f2f0;--tx2:#99c4be;--tx3:#4d7870;--ac:#0d9488;--ac2:#14b8a6;--acbg:rgba(13,148,136,0.12);--or:#f97316;--gn:#10b981;--gr:rgba(13,148,136,0.04);--sh:rgba(0,0,0,0.5);--tbg:rgba(13,148,136,0.10);--ttx:#5eead4;}
+[data-theme="light"]{--bg:#f0fafa;--bg2:#e0f5f3;--bg3:#c8edea;--sf:rgba(0,0,0,0.04);--sf2:rgba(0,0,0,0.08);--bd:rgba(13,148,136,0.20);--bd2:rgba(13,148,136,0.50);--tx:#0a2926;--tx2:#0f4b46;--tx3:#4d7870;--ac:#0d9488;--ac2:#0f766e;--acbg:rgba(13,148,136,0.12);--or:#ea6c0a;--gn:#059669;--gr:rgba(13,148,136,0.07);--sh:rgba(0,100,90,0.15);--tbg:rgba(13,148,136,0.10);--ttx:#0f766e;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:'Crimson Pro',Georgia,serif;background:var(--bg);color:var(--tx);min-height:100vh;overflow-x:hidden;cursor:none;transition:var(--tr);}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--gr) 1px,transparent 1px),linear-gradient(90deg,var(--gr) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--gr) 2px,transparent 2px),linear-gradient(90deg,var(--gr) 2px,transparent 2px);background-size:240px 240px;pointer-events:none;z-index:0;opacity:0.5;}
+[data-theme="light"] body::before{opacity:2;}
+[data-theme="light"] body::after{opacity:1.5;}
+.cur{width:6px;height:6px;background:var(--ac);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+.cur-r{width:28px;height:28px;border:1px solid var(--bd2);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.12s ease;}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:58px;background:var(--bg);border-bottom:1px solid var(--bd);box-shadow:0 2px 18px var(--sh);transition:var(--tr);}
+[data-theme="light"] nav{border-bottom:2px solid var(--bd2);background:rgba(240,250,250,0.97);}
+.nav-brand{display:flex;align-items:baseline;gap:9px;text-decoration:none;cursor:none;}
+.nb-name{font-family:'DM Serif Display',serif;font-size:16px;color:var(--tx);}
+.nb-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.15em;text-transform:uppercase;opacity:.8;}
+.nav-c{display:flex;align-items:center;gap:2px;position:absolute;left:50%;transform:translateX(-50%);}
+.nb{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);background:none;border:none;padding:6px 10px;border-radius:2px;cursor:none;transition:color .2s,background .2s;}
+.nb:hover,.nb.active{color:var(--ac);background:var(--acbg);}
+.nb.cta{border:1px solid var(--bd2);color:var(--ac);}
+.nav-r{display:flex;align-items:center;gap:10px;}
+.tgl{width:46px;height:22px;background:var(--sf2);border:1px solid var(--bd2);border-radius:11px;cursor:none;position:relative;transition:background .3s;flex-shrink:0;}
+.tgl::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--ac);transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
+[data-theme="light"] .tgl::after{transform:translateX(24px);}
+.tgl-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:.1em;text-transform:uppercase;min-width:28px;}
+.page{display:none;min-height:100vh;position:relative;z-index:1;opacity:0;transform:translateY(12px);transition:opacity .38s ease,transform .38s ease;}
+.page.active{display:block;}
+.page.visible{opacity:1;transform:translateY(0);}
+.pw{max-width:1120px;margin:0 auto;padding:86px 52px 80px;}
+.ey{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ac);display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.ey::before{content:'';display:inline-block;width:24px;height:1px;background:var(--ac);}
+.dt{font-family:'DM Serif Display',serif;font-size:clamp(42px,6.5vw,76px);line-height:1.0;letter-spacing:-.01em;color:var(--tx);margin-bottom:18px;}
+.dt em{font-style:italic;color:var(--ac2);}
+.ps{font-family:'Crimson Pro',serif;font-size:19px;font-weight:300;line-height:1.7;color:var(--tx2);max-width:620px;margin-bottom:52px;}
+.sl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.sl::after{content:'';flex:1;height:1px;background:var(--bd);}
+.btn{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:11px 22px;border-radius:2px;text-decoration:none;border:none;cursor:none;display:inline-block;transition:all .2s;}
+.btn-s{background:var(--ac);color:#fff;}
+.btn-s:hover{background:var(--ac2);transform:translateY(-1px);}
+[data-theme="light"] .btn-s{background:var(--ac);box-shadow:0 3px 12px rgba(13,148,136,0.35);}
+[data-theme="light"] .btn-s:hover{background:var(--ac2);box-shadow:0 5px 18px rgba(13,148,136,0.45);}
+.btn-g{border:1px solid var(--bd2);color:var(--tx2);background:none;}
+.btn-g:hover{border-color:var(--ac);color:var(--ac);}
+.xl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;padding:5px 12px;border-radius:2px;border:1px solid var(--bd2);color:var(--ac);text-decoration:none;transition:all .2s;cursor:none;display:inline-block;}
+.xl:hover{background:var(--acbg);}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease;}
+.rv.on{opacity:1;transform:translateY(0);}
+.rv:nth-child(2){transition-delay:.07s;}.rv:nth-child(3){transition-delay:.14s;}.rv:nth-child(4){transition-delay:.21s;}.rv:nth-child(5){transition-delay:.28s;}.rv:nth-child(6){transition-delay:.35s;}.rv:nth-child(7){transition-delay:.42s;}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:3px;transition:border-color .2s,transform .2s,background .2s,var(--tr);}
+.card:hover{border-color:var(--bd2);}
+[data-theme="light"] .card{background:#fff;border:1.5px solid var(--bd2);box-shadow:0 2px 10px var(--sh);}
+[data-theme="light"] .card:hover{border-color:var(--ac);box-shadow:0 4px 20px var(--sh);}
+.lift:hover{transform:translateY(-2px);}
+/* HOME */
+.hkick{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ac);margin-bottom:20px;display:flex;align-items:center;gap:10px;opacity:0;animation:fu .7s .1s forwards;}
+.hkick::before{content:'';width:24px;height:1px;background:var(--ac);display:inline-block;}
+.hname{font-family:'DM Serif Display',serif;font-size:clamp(64px,11vw,122px);line-height:.91;letter-spacing:-.02em;color:var(--tx);margin-bottom:10px;opacity:0;animation:fu .7s .2s forwards;}
+.hname-g{display:block;color:transparent;-webkit-text-stroke:1px var(--bd2);}
+[data-theme="light"] .hname-g{-webkit-text-stroke:2px var(--ac2);}
+.htl{font-family:'Crimson Pro',serif;font-size:clamp(17px,2.5vw,25px);font-weight:300;font-style:italic;color:var(--tx2);margin-bottom:28px;opacity:0;animation:fu .7s .32s forwards;}
+.hdesc{font-family:'Crimson Pro',serif;font-size:19px;font-weight:300;line-height:1.75;color:var(--tx2);max-width:560px;margin-bottom:38px;opacity:0;animation:fu .7s .44s forwards;}
+.hmeta{display:flex;gap:0;flex-wrap:wrap;margin-bottom:40px;border:1px solid var(--bd);border-radius:3px;overflow:hidden;width:fit-content;opacity:0;animation:fu .7s .56s forwards;}
+[data-theme="light"] .hmeta{border:2px solid var(--bd2);background:#fff;box-shadow:0 2px 12px var(--sh);}
+.hmi{padding:12px 20px;border-right:1px solid var(--bd);display:flex;flex-direction:column;gap:4px;}
+.hmi:last-child{border-right:none;}
+.hml{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--tx3);}
+.hmv{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;color:var(--tx);}
+.hmv.hi{color:var(--or);}
+.hbtns{display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fu .7s .68s forwards;}
+.hng{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:64px;border:1px solid var(--bd);border-radius:3px;overflow:hidden;background:var(--bd);}
+[data-theme="light"] .hng{border:2px solid var(--bd2);box-shadow:0 4px 24px var(--sh);}
+.hnc{background:var(--bg);padding:26px 22px;cursor:none;transition:background .2s;display:flex;flex-direction:column;gap:7px;}
+.hnc:hover{background:var(--bg3);}
+[data-theme="light"] .hnc{background:#fff;}
+[data-theme="light"] .hnc:hover{background:var(--acbg);}
+.hnnum{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ac);letter-spacing:.15em;}
+.hntitle{font-family:'DM Serif Display',serif;font-size:17px;color:var(--tx);}
+.hnsub{font-family:'Crimson Pro',serif;font-size:13px;color:var(--tx3);line-height:1.5;}
+.hnarr{font-size:15px;color:var(--tx3);margin-top:8px;transition:color .2s,transform .2s;}
+.hnc:hover .hnarr{color:var(--ac);transform:translateX(4px);}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+/* ABOUT */
+.ag{display:grid;grid-template-columns:1.1fr 1.4fr;gap:64px;align-items:start;}
+.ph{aspect-ratio:3/4;background:var(--sf);border:1px solid var(--bd);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-bottom:22px;position:relative;overflow:hidden;}
+.ph img{width:100%;height:100%;object-fit:cover;border-radius:3px;}
+.ph-ph{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);text-align:center;line-height:1.9;}
+.phc{position:absolute;width:14px;height:14px;border-color:var(--ac2);border-style:solid;border-width:0;opacity:.5;}
+.phc.tl{top:8px;left:8px;border-top-width:1px;border-left-width:1px;}
+.phc.tr{top:8px;right:8px;border-top-width:1px;border-right-width:1px;}
+.phc.bl{bottom:8px;left:8px;border-bottom-width:1px;border-left-width:1px;}
+.phc.br{bottom:8px;right:8px;border-bottom-width:1px;border-right-width:1px;}
+.asts{display:flex;flex-direction:column;gap:10px;}
+.asr{padding:17px 20px;display:flex;justify-content:space-between;align-items:center;}
+.asv{font-family:'DM Serif Display',serif;font-size:34px;color:var(--ac);}
+.asd{font-family:'Crimson Pro',serif;font-size:13px;color:var(--tx3);text-align:right;max-width:170px;line-height:1.5;}
+.ab p{font-size:17px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:17px;}
+.ab p strong{color:var(--tx);font-weight:600;}
+.rtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px;}
+.rtag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;padding:4px 9px;background:var(--tbg);color:var(--ttx);border-radius:2px;border:1px solid transparent;transition:border-color .2s;}
+.rtag:hover{border-color:var(--ac);}
+.etl{display:flex;flex-direction:column;}
+.ei{display:flex;gap:22px;padding-bottom:26px;}
+.ei:last-child{padding-bottom:0;}
+.edc{display:flex;flex-direction:column;align-items:center;width:14px;flex-shrink:0;padding-top:5px;}
+.edot{width:10px;height:10px;border-radius:50%;border:2px solid var(--ac);background:var(--bg);flex-shrink:0;}
+.eline{flex:1;width:1px;background:var(--bd);margin-top:5px;}
+.ei:last-child .eline{display:none;}
+.ebody{flex:1;padding:18px 22px;display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;}
+.edeg{font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:4px;}
+.esch{font-family:'Crimson Pro',serif;font-size:13px;color:var(--tx3);}
+.er{text-align:right;}
+.eyr{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);margin-bottom:5px;}
+.egpa{font-family:'JetBrains Mono',monospace;font-size:21px;font-weight:700;color:var(--ac);}
+.egpal{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--tx3);letter-spacing:.1em;}
+/* EXPERIENCE & RESEARCH */
+.xitem{padding:26px 30px;margin-bottom:18px;position:relative;}
+.xitem::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--ac);border-radius:2px;opacity:0;transition:opacity .2s;}
+.xitem:hover::before{opacity:1;}
+[data-theme="light"] .xitem::before{width:4px;opacity:0;}
+[data-theme="light"] .xitem:hover::before{opacity:1;}
+.xhd{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:13px;flex-wrap:wrap;}
+.xrole{font-family:'DM Serif Display',serif;font-size:21px;margin-bottom:4px;}
+.xorg{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ac);letter-spacing:.07em;}
+.xmt{text-align:right;}
+.xper{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3);margin-bottom:3px;}
+.xloc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);}
+.xpts{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.xpts li{font-family:'Crimson Pro',serif;font-size:16px;font-weight:300;color:var(--tx2);line-height:1.65;padding-left:18px;position:relative;}
+.xpts li::before{content:'—';position:absolute;left:0;color:var(--ac);font-size:12px;top:3px;}
+.xpts li strong{color:var(--tx);font-weight:600;}
+.xpts li.arr::before{content:'→';}
+/* SKILLS */
+.skg{display:grid;grid-template-columns:repeat(auto-fit,minmax(278px,1fr));gap:15px;}
+.skc{padding:22px;}
+.skt{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ac);margin-bottom:13px;}
+.skps{display:flex;flex-wrap:wrap;gap:6px;}
+.skp{font-family:'Crimson Pro',serif;font-size:14px;color:var(--tx2);background:var(--sf);padding:4px 10px;border-radius:2px;border:1px solid var(--bd);transition:border-color .2s,color .2s;}
+.skp:hover{border-color:var(--bd2);color:var(--tx);}
+.skp.cert{border-color:rgba(16,185,129,0.3);color:var(--gn);}
+/* PROJECTS */
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:18px;}
+.pc{padding:26px;position:relative;overflow:hidden;}
+.pc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--ac),transparent);transform:scaleX(0);transform-origin:left;transition:transform .35s ease;}
+.pc:hover::after{transform:scaleX(1);}
+.pc:hover{transform:translateY(-2px);}
+.pimg{width:100%;aspect-ratio:16/9;background:var(--bg3);border:1px solid var(--bd);border-radius:2px;margin-bottom:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.pimg img{width:100%;height:100%;object-fit:cover;}
+.pimgph{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:.08em;text-transform:uppercase;text-align:center;line-height:1.9;padding:12px;}
+.pper{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:.08em;margin-bottom:7px;}
+.pnm{font-family:'DM Serif Display',serif;font-size:21px;margin-bottom:4px;}
+.ptm{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.05em;margin-bottom:13px;}
+.pdesc{font-family:'Crimson Pro',serif;font-size:15px;font-weight:300;color:var(--tx2);line-height:1.7;margin-bottom:14px;}
+.ptools{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:14px;}
+.tt{font-family:'JetBrains Mono',monospace;font-size:8px;padding:3px 7px;border:1px solid var(--bd);border-radius:2px;color:var(--tx3);}
+.pls{display:flex;gap:7px;flex-wrap:wrap;}
+/* PUBLICATIONS */
+.publ{display:flex;flex-direction:column;gap:16px;}
+.pubc{padding:26px 30px;border-left:3px solid var(--ac) !important;border-radius:0 3px 3px 0 !important;}
+.pubc:hover{background:var(--acbg) !important;}
+.pubnum{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.1em;margin-bottom:9px;}
+.pubt{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.4;margin-bottom:9px;}
+.pubv{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.05em;margin-bottom:7px;}
+.puba{font-family:'Crimson Pro',serif;font-size:14px;font-weight:300;color:var(--tx3);line-height:1.6;}
+.puba strong{color:var(--tx2);font-weight:600;}
+/* AWARDS */
+.awl{display:flex;flex-direction:column;gap:10px;}
+.awr{display:flex;align-items:center;gap:16px;padding:16px 22px;}
+.awr:hover{border-color:rgba(249,115,22,.4) !important;}
+.awico{font-size:19px;flex-shrink:0;width:30px;text-align:center;}
+.awi{flex:1;}
+.awt{font-family:'Crimson Pro',serif;font-size:15px;font-weight:600;margin-bottom:3px;}
+.aws{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:.03em;}
+.awb{background:rgba(249,115,22,.12);color:var(--or);font-family:'JetBrains Mono',monospace;font-size:8px;padding:3px 8px;border-radius:2px;white-space:nowrap;letter-spacing:.07em;}
+.awd{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);white-space:nowrap;}
+/* LEADERSHIP */
+.lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:14px;}
+.lc{padding:20px 22px;}
+.lr{font-family:'DM Serif Display',serif;font-size:17px;margin-bottom:4px;}
+.lo{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.05em;margin-bottom:4px;}
+.lp{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--tx3);margin-bottom:11px;}
+.ld{font-family:'Crimson Pro',serif;font-size:14px;font-weight:300;color:var(--tx2);line-height:1.65;}
+/* CERTS */
+.crl{display:flex;flex-direction:column;gap:9px;}
+.crr{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 22px;flex-wrap:wrap;}
+.crn{font-family:'Crimson Pro',serif;font-size:15px;font-weight:600;margin-bottom:3px;}
+.cri{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.04em;}
+.crrt{display:flex;align-items:center;gap:9px;}
+.crd{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);}
+/* CONTACT */
+.cog{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.coint{font-family:'Crimson Pro',serif;font-size:17px;font-weight:300;color:var(--tx2);line-height:1.85;margin-bottom:26px;}
+.colk{display:flex;flex-direction:column;gap:7px;}
+.colk a{display:flex;align-items:center;gap:13px;padding:12px 16px;text-decoration:none;color:var(--tx2);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.04em;cursor:none;transition:color .2s,border-color .2s;}
+.colk a:hover{color:var(--ac);border-color:var(--ac) !important;}
+.cico{width:15px;text-align:center;flex-shrink:0;color:var(--ac);}
+.rfl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--tx3);margin-bottom:14px;}
+.rfc{padding:16px 20px;margin-bottom:11px;}
+.rfn{font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:3px;}
+.rft{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);letter-spacing:.04em;margin-bottom:9px;}
+.rfct{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3);line-height:1.9;}
+.rfct a{color:var(--tx3);text-decoration:none;transition:color .2s;cursor:none;}
+.rfct a:hover{color:var(--ac);}
+.addb{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--tx3);line-height:1.9;padding:14px 18px;}
+footer{border-top:1px solid var(--bd);padding:20px 52px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;transition:var(--tr);}
+[data-theme="light"] footer{border-top:2px solid var(--bd2);background:var(--bg2);}
+.fc{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);}
+.fn{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ac);}
+@media(max-width:900px){nav{padding:0 18px;}.nav-c{display:none;}.pw{padding:78px 20px 56px;}.ag,.cog{grid-template-columns:1fr;gap:32px;}.hng{grid-template-columns:1fr 1fr;}footer{padding:16px 20px;flex-direction:column;gap:5px;text-align:center;}}
+@media(max-width:580px){.hng{grid-template-columns:1fr;}.hname{font-size:54px;}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div>
+
+<nav>
+  <a class="nav-brand" onclick="go('home')"><span class="nb-name">Safwan Sakib</span><span class="nb-tag">ME · BUET · Researcher</span></a>
+  <div class="nav-c">
+    <button class="nb" onclick="go('home')" id="n-home">Home</button>
+    <button class="nb" onclick="go('about')" id="n-about">About</button>
+    <button class="nb" onclick="go('experience')" id="n-experience">Experience</button>
+    <button class="nb" onclick="go('research')" id="n-research">Research</button>
+    <button class="nb" onclick="go('projects')" id="n-projects">Projects</button>
+    <button class="nb" onclick="go('publications')" id="n-publications">Papers</button>
+    <button class="nb" onclick="go('awards')" id="n-awards">Awards</button>
+    <button class="nb" onclick="go('skills')" id="n-skills">Skills</button>
+    <button class="nb cta" onclick="go('contact')" id="n-contact">Contact</button>
+  </div>
+  <div class="nav-r">
+    <span class="tgl-lbl" id="tlbl">Dark</span>
+    <div class="tgl" id="tgl"></div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div class="page" id="p-home">
+<div class="pw" style="padding-top:22px;">
+  <div class="hkick">Mechanical Engineer · Researcher · BUET</div>
+  <h1 class="hname">SAFWAN<br><span class="hname-g">SAKIB</span></h1>
+  <p class="htl">Engineering, Research &amp; Design</p>
+  <p class="hdesc">Bridging precision mechanical design, autonomous systems, and applied research — from thermal engineering and structural analysis to Mars rovers competing on three continents.</p>
+  <div class="hmeta">
+    <div class="hmi"><span class="hml">CGPA</span><span class="hmv hi">3.80 / 4.00</span></div>
+    <div class="hmi"><span class="hml">Institution</span><span class="hmv">BUET</span></div>
+    <div class="hmi"><span class="hml">Dept</span><span class="hmv">Mech. Eng.</span></div>
+    <div class="hmi"><span class="hml">Year</span><span class="hmv">8th Semester</span></div>
+    <div class="hmi"><span class="hml">Location</span><span class="hmv">Dhaka, BD</span></div>
+  </div>
+  <div class="hbtns">
+    <button class="btn btn-s" onclick="go('research')">Research &amp; Projects</button>
+    <button class="btn btn-g" onclick="go('contact')">Get In Touch</button>
+    <a class="btn btn-g" href="mailto:ssakib427@gmail.com">Email Me</a>
+  </div>
+  <div class="hng rv">
+    <div class="hnc" onclick="go('experience')"><span class="hnnum">01 — Experience</span><span class="hntitle">Professional</span><span class="hnsub">SPARRSO Research Fellow · CPGCBL Trainee</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('research')"><span class="hnnum">02 — Research</span><span class="hntitle">Thesis &amp; Labs</span><span class="hnsub">UAV control · Heat transfer · SPARRSO</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('projects')"><span class="hnnum">03 — Projects</span><span class="hntitle">Engineering Builds</span><span class="hnsub">Mars rovers · Solar collectors · Formula car</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('publications')"><span class="hnnum">04 — Publications</span><span class="hntitle">Papers</span><span class="hnsub">3 papers · IEEE · ICME · BSME</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('awards')"><span class="hnnum">05 — Awards</span><span class="hntitle">Honors</span><span class="hnsub">4× Champion · BDT 90K grant · IChO</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('skills')"><span class="hnnum">06 — Skills</span><span class="hntitle">Technical Stack</span><span class="hnsub">CAD · FEA · Python · ROS 2 · Deep RL</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('about')"><span class="hnnum">07 — About</span><span class="hntitle">Background</span><span class="hnsub">BUET · 3.80 CGPA · 7 leadership roles</span><span class="hnarr">→</span></div>
+    <div class="hnc" onclick="go('contact')"><span class="hnnum">08 — Contact</span><span class="hntitle">Connect</span><span class="hnsub">Open to research &amp; engineering roles</span><span class="hnarr">→</span></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib · All rights reserved</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="p-about">
+<div class="pw">
+  <div class="ey">About Me</div>
+  <h1 class="dt">The Engineer<br><em>Behind the Work</em></h1>
+  <p class="ps">A researcher and engineer driven by the challenge of designing, simulating, and building systems that push the boundary of what's possible.</p>
+  <div class="ag">
+    <div>
+      <div class="ph rv">
+        <!-- TO ADD YOUR PHOTO: replace the div below with <img src="photo.jpg" alt="Safwan Sakib"> -->
+        <div class="ph-ph">📷<br>Your Photo Here<br><br>Replace with:<br>&lt;img src="photo.jpg"&gt;</div>
+        <div class="phc tl"></div><div class="phc tr"></div><div class="phc bl"></div><div class="phc br"></div>
+      </div>
+      <div class="asts">
+        <div class="asr card rv"><span class="asv">3.80</span><span class="asd">CGPA at BUET Mechanical Engineering</span></div>
+        <div class="asr card rv"><span class="asv">4+</span><span class="asd">International rover competitions, 3 continents</span></div>
+        <div class="asr card rv"><span class="asv">4×</span><span class="asd">Champion at national-level competitions</span></div>
+        <div class="asr card rv"><span class="asv">3</span><span class="asd">Conference papers in 2024–2025</span></div>
+        <div class="asr card rv"><span class="asv">7</span><span class="asd">Active leadership roles across clubs &amp; teams</span></div>
+      </div>
+    </div>
+    <div class="ab">
+      <p>I'm <strong>Safwan Sakib</strong>, an undergraduate Mechanical Engineering student at <strong>Bangladesh University of Engineering and Technology (BUET)</strong>, currently in my 8th semester. My work spans robotics, autonomous systems, thermal engineering, structural analysis, and precision mechanical design.</p>
+      <p>My thesis focuses on <strong>quadcopter UAV flight control</strong> — developing algorithms using MPC and LQR techniques alongside path-planning and Deep Reinforcement Learning approaches. Alongside this, I work as a <strong>Junior Research Fellow at SPARRSO</strong> on CubeSat subsystem design and autonomous vehicle platforms, and have conducted research in convection heat transfer and computational fluid dynamics.</p>
+      <p>I lead Team Interplanetar as <strong>Head of Operations</strong> — directing Mars rovers that have competed in Poland, USA, and Turkey. I hold the presidency of the BUET Automobile Club and vice-presidency of the BUET Robotics Society. I hold <strong>three Certified SolidWorks Professional</strong> credentials and have published in IEEE, ICME, and BSME international conferences.</p>
+      <div class="rtags">
+        <span class="rtag">Mechanical Design</span><span class="rtag">UAV Systems</span><span class="rtag">Control Systems</span><span class="rtag">FEA &amp; Simulation</span><span class="rtag">Additive Manufacturing</span><span class="rtag">Structural Mechanics</span><span class="rtag">Heat Transfer &amp; CFD</span><span class="rtag">Deep RL &amp; Robotics</span>
+      </div>
+      <div style="margin-top:44px;">
+        <div class="sl">Education</div>
+        <div class="etl">
+          <div class="ei rv"><div class="edc"><div class="edot"></div><div class="eline"></div></div><div class="ebody card"><div><div class="edeg">B.Sc. in Mechanical Engineering</div><div class="esch">Bangladesh University of Engineering and Technology (BUET) · 8th Semester</div></div><div class="er"><div class="eyr">Jan 2021 — Jun 2026</div><div class="egpa">3.80</div><div class="egpal">CGPA / 4.00</div></div></div></div>
+          <div class="ei rv"><div class="edc"><div class="edot"></div><div class="eline"></div></div><div class="ebody card"><div><div class="edeg">Higher Secondary Certificate</div><div class="esch">Notre Dame College · Dhaka Board</div></div><div class="er"><div class="eyr">2020</div><div class="egpa">5.00</div><div class="egpal">GPA / 5.00</div></div></div></div>
+          <div class="ei rv"><div class="edc"><div class="edot"></div><div class="eline"></div></div><div class="ebody card"><div><div class="edeg">Secondary School Certificate</div><div class="esch">Dhaka Residential Model College · Dhaka Board</div></div><div class="er"><div class="eyr">2018</div><div class="egpa">5.00</div><div class="egpal">GPA / 5.00</div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="page" id="p-experience">
+<div class="pw">
+  <div class="ey">Professional Experience</div>
+  <h1 class="dt">Industry &amp;<br><em>Research Roles</em></h1>
+  <p class="ps">Hands-on engineering across national research institutions, energy facilities, and competitive teams.</p>
+  <div class="xitem card lift rv">
+    <div class="xhd">
+      <div><div class="xrole">Junior Research Fellow</div><div class="xorg">SPARRSO — Bangladesh Space Research and Remote Sensing Organization</div></div>
+      <div class="xmt"><div class="xper">September 2025 — Present</div><div class="xloc">Dhaka, Bangladesh</div></div>
+    </div>
+    <div style="margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:.07em;">Project: Multi-Domain Space Engineering Approaches for Space Technology Development at SPARRSO (Phase I)</div>
+    <ul class="xpts">
+      <li>Research and experimentation at the national lab facility, specializing in <strong>CubeSat subsystem design, testing, and integration</strong></li>
+      <li>Design and operation of <strong>autonomous unmanned aerial vehicle (UAV) and unmanned ground vehicle (UGV)</strong> platforms, including embedded systems and control algorithms</li>
+    </ul>
+  </div>
+  <div class="xitem card lift rv">
+    <div class="xhd">
+      <div><div class="xrole">Industrial Trainee</div><div class="xorg">Coal Power Generation Company Bangladesh Limited (CPGCBL)</div></div>
+      <div class="xmt"><div class="xper">March 2025</div><div class="xloc">Matarbari, Cox's Bazar</div></div>
+    </div>
+    <ul class="xpts">
+      <li>One-month industrial attachment at the <strong>Matarbari 2×600 MW Ultra Super Critical Power Plant</strong></li>
+      <li>Hands-on exposure to <strong>Boiler, Turbine, ESP, FGD, Water Treatment, Control Room (SCADA/DCS), Ash Management, and Coal Handling</strong> systems</li>
+    </ul>
+    <div style="margin-top:14px;"><a class="xl" href="https://cpgcbl.gov.bd/credential/safwansakib" target="_blank">Credential ↗</a></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- RESEARCH -->
+<div class="page" id="p-research">
+<div class="pw">
+  <div class="ey">Research Experience</div>
+  <h1 class="dt">Thesis &amp;<br><em>Lab Research</em></h1>
+  <p class="ps">Pursuing autonomous flight intelligence — from model-predictive control to deep reinforcement learning on real hardware.</p>
+  <div class="xitem card lift rv">
+    <div class="xhd">
+      <div><div class="xrole">Undergraduate Thesis — Quadcopter UAV Systems</div><div class="xorg">Supervisor: Dr. Kazi Arafat Rahman · Associate Professor, ME Dept, BUET</div></div>
+      <div class="xmt"><div class="xper">April 2025 — Present</div></div>
+    </div>
+    <ul class="xpts">
+      <li class="arr">Programmed flight controller algorithms based on <strong>MPC and LQR</strong> techniques in Python and embedded in <strong>custom Pixhawk firmware</strong> to enable stable flights and trajectory control</li>
+      <li class="arr">Proposed autonomous navigation schemes employing classical (<strong>A*, RRT*, APF</strong>) and <strong>Deep Reinforcement Learning (PPO, SAC, TD3)</strong> approaches for flying in known and unknown surroundings</li>
+      <li class="arr">Tested algorithms using <strong>ROS 2 + Gazebo</strong> simulation environment (PX4 SITL) and successfully implemented on a <strong>real-life custom quadcopter platform</strong></li>
+      <li class="arr">Designed <strong>Li-Ion battery model in MATLAB</strong> incorporating thermal dynamics through a customized experimental chamber</li>
+    </ul>
+  </div>
+  <div class="xitem card lift rv">
+    <div class="xhd">
+      <div><div class="xrole">CFDHT Research Group</div><div class="xorg">Supervisor: Dr. Sumon Saha · Professor, ME Dept, BUET</div></div>
+      <div class="xmt"><div class="xper">April 2024 — December 2024</div></div>
+    </div>
+    <div style="margin-bottom:12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--tx3);letter-spacing:.07em;">Project: Entropy Generation Analysis in a Ferrofluid filled Stepped Grooved Square Cavity Undergoing MHD and Joule Heating Effects</div>
+    <ul class="xpts">
+      <li class="arr">Performed <strong>numerical simulation of MHD mixed convection</strong> inside stepped grooved cavity using finite element technique (<strong>COMSOL Multiphysics</strong>)</li>
+      <li class="arr">Studied heat transfer and entropy generation for <strong>ferrofluid (Fe₃O₄-water)</strong> in presence of joule heating and magnetization</li>
+      <li class="arr">Results published at <strong>9th BSME International Conference on Thermal Engineering, 2024</strong> — to be published in AIP Proceedings</li>
+    </ul>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- PROJECTS -->
+<div class="page" id="p-projects">
+<div class="pw">
+  <div class="ey">Notable Projects</div>
+  <h1 class="dt">Engineering<br><em>Builds</em></h1>
+  <p class="ps">Designed, simulated, and deployed — real machines that compete on the world stage.</p>
+  <div class="pg">
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>project-xvi.jpg</div></div>
+      <div class="pper">Oct 2024 — Present</div><div class="pnm">Project XVI</div>
+      <div class="ptm">Team Interplanetar · BUET Mars Rover · 2025 Challenges</div>
+      <div class="pdesc">6th generation BUET Mars Rover — complete redesign of all systems. Leading the Technical division: Wheel, Suspension, Steering, Wrist, and Science Tools.</div>
+      <div class="ptools"><span class="tt">SolidWorks</span></div>
+      <div class="pls"><a class="xl" href="https://interplanetar.buet.ac.bd" target="_blank">Team Site ↗</a></div>
+    </div>
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>prochesta.jpg</div></div>
+      <div class="pper">Nov 2022 — Sep 2024</div><div class="pnm">Prochesta V1 | V2 | V3</div>
+      <div class="ptm">Team Interplanetar · URC23 | ARC23 | ERC23 | ARC24 | ERC24</div>
+      <div class="pdesc">5th generation BUET rover — lighter, more functional, improved space budget. Modular arm and science tool designed, simulated, and manufactured from scratch. Competed in USA, Turkey, and Poland.</div>
+      <div class="ptools"><span class="tt">SolidWorks</span><span class="tt">ANSYS</span></div>
+      <div class="pls"><a class="xl" href="https://github.com/safwansakib/prochesta" target="_blank">Project Link ↗</a></div>
+    </div>
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>rocko.jpg</div></div>
+      <div class="pper">Nov 2023 — Mar 2024</div><div class="pnm">ROCKO</div>
+      <div class="ptm">Gecko-Inspired Quadruped Climbing Robot · IEEE ICCIT 2025</div>
+      <div class="pdesc">Vertical climbing robot using passive suction adhesion and rhythmic four-leg gait. Arduino Nano, ESP32 CAM, HC-06 Bluetooth, and custom PCBs enable video surveillance, object detection, and defect identification. Published at IEEE ICCIT 2025.</div>
+      <div class="ptools"><span class="tt">SolidWorks</span><span class="tt">OpenCV</span><span class="tt">Python</span><span class="tt">MATLAB</span><span class="tt">Arduino IDE</span></div>
+      <div class="pls"><a class="xl" href="https://youtu.be/rocko-video" target="_blank">Video ↗</a><a class="xl" href="https://drive.google.com/rocko-poster" target="_blank">Poster ↗</a></div>
+    </div>
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>solar-trough.jpg</div></div>
+      <div class="pper">Sep 2024 — Dec 2024</div><div class="pnm">Parabolic Trough Solar Collector</div>
+      <div class="ptm">Thermo-fluid System · Heat Transfer Research</div>
+      <div class="pdesc">Designed and simulated a Parabolic Trough Solar Collector with PCM-based thermal storage. Optimized heat transfer performance through ANSYS, SolidWorks, and Tecplot simulations.</div>
+      <div class="ptools"><span class="tt">ANSYS Fluent</span><span class="tt">SolidWorks</span><span class="tt">Tecplot 360 EX</span><span class="tt">MATLAB</span></div>
+      <div class="pls"><a class="xl" href="https://github.com/safwansakib/solar-trough" target="_blank">GitHub ↗</a></div>
+    </div>
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>formula-car.jpg</div></div>
+      <div class="pper">Nov 2021 — Present</div><div class="pnm">Formula Student Racecar</div>
+      <div class="ptm">Automaestro · BUET Formula Student Team · FSUK22 | FB23</div>
+      <div class="pdesc">First Formula Student racecar chassis at BUET. Designed chassis, steering system, and seat. Performed full structural analysis using SolidWorks Simulation and ANSYS; led manufacturing.</div>
+      <div class="ptools"><span class="tt">SolidWorks</span><span class="tt">ANSYS</span><span class="tt">SW Simulation</span></div>
+      <div class="pls"><a class="xl" href="https://automaestro.buet.ac.bd" target="_blank">Project Link ↗</a></div>
+    </div>
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>line-follower.jpg</div></div>
+      <div class="pper">Jul 2023 — Mar 2024</div><div class="pnm">Advanced Line Following Robot</div>
+      <div class="ptm">Team Nuvola · BUET Robotics Society</div>
+      <div class="pdesc">Custom PCB and sensor boards with PID algorithm. Arduino microcontroller performs real-time sensor analysis for high-precision line following.</div>
+      <div class="ptools"><span class="tt">Arduino</span><span class="tt">PCB Design</span><span class="tt">PID Algorithm</span><span class="tt">C++</span></div>
+      <div class="pls"><a class="xl" href="https://github.com/safwansakib/line-follower" target="_blank">GitHub ↗</a></div>
+    </div>
+    <div class="pc card rv">
+      <div class="pimg"><div class="pimgph">📷 Add photo<br>micromouse.jpg</div></div>
+      <div class="pper">Jan 2024 — Present</div><div class="pnm">Micro Mouse</div>
+      <div class="ptm">Team Nuvola · BUET Robotics Society</div>
+      <div class="pdesc">Autonomous maze-solving robot using pathfinding algorithms and sensor-based navigation. Real-time obstacle detection and shortest-path optimization.</div>
+      <div class="ptools"><span class="tt">Arduino</span><span class="tt">Motor Drivers</span><span class="tt">Pathfinding Algorithms</span><span class="tt">C++</span></div>
+      <div class="pls"><a class="xl" href="https://github.com/safwansakib/micromouse" target="_blank">GitHub ↗</a></div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- PUBLICATIONS -->
+<div class="page" id="p-publications">
+<div class="pw">
+  <div class="ey">Publications</div>
+  <h1 class="dt">Conference<br><em>Papers</em></h1>
+  <p class="ps">Peer-reviewed research presented at international engineering and computer science conferences.</p>
+  <div class="publ">
+    <div class="pubc card rv">
+      <div class="pubnum">[ 01 ] — ICME 2025</div>
+      <div class="pubt">Design and Performance Optimization of a Multi-Purpose Autonomous Rover for Planetary and Terrestrial Applications</div>
+      <div class="pubv">15th International Conference on Mechanical Engineering (ICME 2025) · Published in SSRN</div>
+      <div class="puba">Sahib U. Rauf, <strong>Safwan Sakib</strong>, Md. A. Hassan, Sk. F. Sabik, Nahian P. Jaman, Md. Arafath R. Nishat, Tawhidul I. Tahsif, Nafisa A. Tanisha, Salman R. Sunny and K. Arafat Rahman</div>
+      <div style="margin-top:13px;"><a class="xl" href="https://ssrn.com/abstract=icme2025-rover" target="_blank">SSRN ↗</a></div>
+    </div>
+    <div class="pubc card rv">
+      <div class="pubnum">[ 02 ] — IEEE ICCIT 2025</div>
+      <div class="pubt">A Gecko-Inspired Quadruped Robot for Vertical Climbing via Passive Suction Adhesion</div>
+      <div class="pubv">28th International Conference on Computer and Information Technology (ICCIT 2025) · To be published on IEEE Xplore</div>
+      <div class="puba"><strong>Safwan Sakib</strong>, Sk. F. Sabik, Nahian P. Jaman, Abdullah A. Mohtasim</div>
+      <div style="margin-top:13px;"><a class="xl" href="https://ieeexplore.ieee.org/iccit2025/rocko" target="_blank">IEEE Xplore ↗</a></div>
+    </div>
+    <div class="pubc card rv">
+      <div class="pubnum">[ 03 ] — BSME 2024</div>
+      <div class="pubt">Entropy Generation Analysis in a Ferrofluid filled Stepped Grooved Square Cavity Undergoing MHD and Joule Heating Effects and Featuring a Vertically Oscillating Cylinder</div>
+      <div class="pubv">9th BSME International Conference on Thermal Engineering, 2024 · To be published in AIP Proceedings</div>
+      <div class="puba">M. A. Ahamed, D. J. Ritu, <strong>S. Sakib</strong>, S. Dhaulat, S. Saha</div>
+      <div style="margin-top:13px;"><a class="xl" href="https://aip.scitation.org/bsme2024" target="_blank">AIP Proceedings ↗</a></div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- AWARDS -->
+<div class="page" id="p-awards">
+<div class="pw">
+  <div class="ey">Awards &amp; Honors</div>
+  <h1 class="dt">Achievements<br><em>Worldwide</em></h1>
+  <p class="ps">National championships, international rover competitions, and academic distinctions across three continents.</p>
+  <div class="awl">
+    <div class="awr card rv"><span class="awico">🏆</span><div class="awi"><div class="awt">Champion — RISE BUET Innovation Cohort 1 · Grant: BDT 90,000</div><div class="aws">Organized by BUET and UIHP · Oct 2024 – May 2025</div></div><span class="awb">CHAMPION</span><a class="xl" href="https://rise.buet.ac.bd/cohort1" target="_blank">Credential ↗</a></div>
+    <div class="awr card rv"><span class="awico">🏆</span><div class="awi"><div class="awt">Champion — CAD Clash: Inter University CAD Competition</div><div class="aws">Mecha Fest 2023 · BUET</div></div><span class="awb">CHAMPION</span><span class="awd">Feb 2024</span><a class="xl" href="https://mechafest.buet.ac.bd/cadclash2023" target="_blank">Credential ↗</a></div>
+    <div class="awr card rv"><span class="awico">🏆</span><div class="awi"><div class="awt">Champion — Project Showcase</div><div class="aws">EEE Day 2024 · BUET</div></div><span class="awb">CHAMPION</span><span class="awd">Dec 2024</span></div>
+    <div class="awr card rv"><span class="awico">🏆</span><div class="awi"><div class="awt">Champion — Project Showcase, Robo Carnival 2024</div><div class="aws">BUET Robotics Society · BUET</div></div><span class="awb">CHAMPION</span><span class="awd">Dec 2024</span><a class="xl" href="https://robocarnival.buet.ac.bd/2024" target="_blank">Credential ↗</a></div>
+    <div class="awr card rv"><span class="awico">🌍</span><div class="awi"><div class="awt">European Rover Challenge — 24th / 69 Teams</div><div class="aws">Kielce, Poland · Onsite Edition</div></div><span class="awd">Sep 2024</span></div>
+    <div class="awr card rv"><span class="awico">🚀</span><div class="awi"><div class="awt">University Rover Challenge — 26th / 104 Teams</div><div class="aws">MDRS, Utah, USA</div></div><span class="awd">Jun 2023</span><a class="xl" href="https://urc.marssociety.org/2023/results" target="_blank">Credential ↗</a></div>
+    <div class="awr card rv"><span class="awico">🌐</span><div class="awi"><div class="awt">Anatolian Rover Challenge — 1st Seed Qualification</div><div class="aws">Ankara, Türkiye</div></div><span class="awd">Jul 2023</span></div>
+    <div class="awr card rv"><span class="awico">🌐</span><div class="awi"><div class="awt">Anatolian Rover Challenge — 2nd Seed Qualification</div><div class="aws">Ankara, Türkiye</div></div><span class="awd">Jul 2024</span></div>
+    <div class="awr card rv"><span class="awico">🌏</span><div class="awi"><div class="awt">International Rover Design Challenge — 15th Worldwide</div><div class="aws">India</div></div><span class="awd">Jul 2023</span></div>
+    <div class="awr card rv"><span class="awico">⚗️</span><div class="awi"><div class="awt">Honorable Mention — 53rd International Chemistry Olympiad</div><div class="aws">Tokyo, Japan</div></div><span class="awd">2021</span><a class="xl" href="https://icho2021.jp/results" target="_blank">Credential ↗</a></div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- SKILLS -->
+<div class="page" id="p-skills">
+<div class="pw">
+  <div class="ey">Technical Skills</div>
+  <h1 class="dt">Tools &amp;<br><em>Technologies</em></h1>
+  <p class="ps">A versatile technical stack built through years of competitive robotics, research, and engineering projects.</p>
+  <div class="skg">
+    <div class="skc card lift rv"><div class="skt">CAD &amp; Design</div><div class="skps"><span class="skp cert">SolidWorks — CSWP</span><span class="skp cert">SolidWorks — CSWPA-SM</span><span class="skp cert">SolidWorks — CSWA-S</span><span class="skp">AutoCAD</span></div></div>
+    <div class="skc card lift rv"><div class="skt">Simulation &amp; FEA</div><div class="skps"><span class="skp">ANSYS</span><span class="skp">ANSYS Fluent</span><span class="skp">SW Simulation</span><span class="skp">COMSOL Multiphysics</span><span class="skp">Tecplot 360 EX</span></div></div>
+    <div class="skc card lift rv"><div class="skt">Programming &amp; Scripting</div><div class="skps"><span class="skp">Python</span><span class="skp">MATLAB</span><span class="skp">C / C++</span><span class="skp">Arduino IDE</span><span class="skp">LaTeX</span></div></div>
+    <div class="skc card lift rv"><div class="skt">Robotics &amp; Control</div><div class="skps"><span class="skp">ROS 2</span><span class="skp">Gazebo (PX4 SITL)</span><span class="skp">Pixhawk Firmware</span><span class="skp">MPC / LQR</span><span class="skp">A* / RRT* / APF</span></div></div>
+    <div class="skc card lift rv"><div class="skt">AI / ML &amp; Computer Vision</div><div class="skps"><span class="skp">Deep Reinforcement Learning</span><span class="skp">PPO / SAC / TD3</span><span class="skp">OpenCV</span><span class="skp">Image &amp; Video Processing</span><span class="skp">ML Basics</span></div></div>
+    <div class="skc card lift rv"><div class="skt">3D Modelling &amp; Graphics</div><div class="skps"><span class="skp">Blender</span><span class="skp">Adobe Illustrator</span><span class="skp">Adobe Photoshop</span><span class="skp">Canva</span></div></div>
+    <div class="skc card lift rv"><div class="skt">Other Tools</div><div class="skps"><span class="skp">Flutter (Basics)</span><span class="skp">Microsoft Office</span><span class="skp">PCB Design</span></div></div>
+    <div class="skc card lift rv"><div class="skt">Soft Skills</div><div class="skps"><span class="skp">Public Speaking</span><span class="skp">Event Management</span><span class="skp">Academic Writing</span><span class="skp">Sketching</span></div></div>
+    <div class="skc card lift rv"><div class="skt">Languages</div><div class="skps"><span class="skp">Bengali — Native</span><span class="skp">English — Proficient</span></div></div>
+  </div>
+
+  <div style="margin-top:52px;">
+    <div class="sl">Certifications</div>
+    <div class="crl">
+      <div class="crr card lift rv"><div><div class="crn">Certified SolidWorks Professional (CSWP) — Mechanical Design</div><div class="cri">Dassault Systèmes SolidWorks</div></div><div class="crrt"><span class="crd">Jul 2024</span><a class="xl" href="https://www.solidworks.com/sw/support/validatecerts.htm" target="_blank">Verify ↗</a></div></div>
+      <div class="crr card lift rv"><div><div class="crn">SolidWorks Sheet Metal Professional (CSWPA-SM)</div><div class="cri">Dassault Systèmes SolidWorks</div></div><div class="crrt"><span class="crd">Jul 2024</span><a class="xl" href="https://www.solidworks.com/sw/support/validatecerts.htm" target="_blank">Verify ↗</a></div></div>
+      <div class="crr card lift rv"><div><div class="crn">SolidWorks Simulations Associate (CSWA-S)</div><div class="cri">Dassault Systèmes SolidWorks</div></div><div class="crrt"><span class="crd">Sep 2024</span><a class="xl" href="https://www.solidworks.com/sw/support/validatecerts.htm" target="_blank">Verify ↗</a></div></div>
+      <div class="crr card lift rv"><div><div class="crn">Supervised Machine Learning</div><div class="cri">Coursera · DeepLearning.AI &amp; Stanford University</div></div><div class="crrt"><span class="crd">Nov 2024</span><a class="xl" href="https://www.coursera.org/account/accomplishments/verify/safwansakib" target="_blank">Verify ↗</a></div></div>
+      <div class="crr card lift rv"><div><div class="crn">Industrial Trainee Certificate — CPGCBL</div><div class="cri">Coal Power Generation Company Bangladesh Limited</div></div><div class="crrt"><span class="crd">Mar 2025</span><a class="xl" href="https://cpgcbl.gov.bd/credential/safwansakib" target="_blank">Verify ↗</a></div></div>
+      <div class="crr card lift rv"><div><div class="crn">Instructor — Interplanetar Workshop 2023</div><div class="cri">Team Interplanetar · BUET</div></div><div class="crrt"><span class="crd">Jan 2024</span><a class="xl" href="https://interplanetar.buet.ac.bd/workshop2023/cert" target="_blank">Verify ↗</a></div></div>
+    </div>
+  </div>
+
+  <div style="margin-top:52px;">
+    <div class="sl">Leadership &amp; Extra-Curricular</div>
+    <div class="lg">
+      <div class="lc card lift rv"><div class="lr">Head of Operations</div><div class="lo">Team Interplanetar · BUET Mars Rover</div><div class="lp">Nov 2022 — Present</div><div class="ld">Directed mechanical design, fabrication, and assembly of rover components. Led team in 4+ international competitions worldwide.</div></div>
+      <div class="lc card lift rv"><div class="lr">President</div><div class="lo">BUET Automobile Club</div><div class="lp">Oct 2022 — Present</div><div class="ld">Conducted workshops and skill development seminars. Organized Auto Fest 2024, Auto Carnival 2026, and other events.</div></div>
+      <div class="lc card lift rv"><div class="lr">Vice President</div><div class="lo">BUET Robotics Society</div><div class="lp">Oct 2022 — Present</div><div class="ld">Arranged and instructed workshops on Arduino programming and robotics. Organized Robo Carnival 2023 and 2024.</div></div>
+      <div class="lc card lift rv"><div class="lr">Electronics Subteam Lead</div><div class="lo">Automaestro · BUET Formula Student Team</div><div class="lp">Mar 2023 — Present</div><div class="ld">Mechanical designs and manufacturing of subsystems for Formula Student vehicle (FSUK22, FB23).</div></div>
+      <div class="lc card lift rv"><div class="lr">Treasurer</div><div class="lo">ASHRAE BUET Student Branch</div><div class="lp">Jul 2024 — Present</div><div class="ld">Arranged seminars and collaborated with ASHRAE Bangladesh Chapter. Industrial visit at Elite Hi-Tech Ind. Ltd.</div></div>
+      <div class="lc card lift rv"><div class="lr">Vice Chair</div><div class="lo">IMechE BUET Student Chapter</div><div class="lp">Jan 2023 — Present</div><div class="ld">Digital content design. Arranged workshops on drone basics and programming.</div></div>
+      <div class="lc card lift rv"><div class="lr">Vice President</div><div class="lo">BUET Career Club</div><div class="lp">Sep 2022 — Present</div><div class="ld">Digital content designer. Organized Career Carnival 2024 and many other events.</div></div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="p-contact">
+<div class="pw">
+  <div class="ey">Contact</div>
+  <h1 class="dt">Let's<br><em>Connect</em></h1>
+  <p class="ps">Open to research collaborations, internships, and engineering opportunities globally.</p>
+  <div class="cog">
+    <div>
+      <p class="coint">Whether you want to discuss mechanical design, thermal systems, autonomous vehicles, rover engineering, or potential research collaborations — I'm always happy to connect. Based in Dhaka, Bangladesh; available remotely worldwide.</p>
+      <div class="sl" style="margin-bottom:12px;">Direct Links</div>
+      <div class="colk">
+        <a class="card" href="mailto:ssakib427@gmail.com"><span class="cico">✉</span> ssakib427@gmail.com</a>
+        <a class="card" href="mailto:2010046@me.buet.ac.bd"><span class="cico">🎓</span> 2010046@me.buet.ac.bd</a>
+        <a class="card" href="tel:+8801957524840"><span class="cico">📱</span> (+880) 1957524840</a>
+        <a class="card" href="https://www.linkedin.com/in/safwansakib" target="_blank"><span class="cico">in</span> linkedin.com/in/safwansakib</a>
+        <a class="card" href="https://www.facebook.com/safwan.sakib.buet" target="_blank"><span class="cico">f</span> facebook.com/safwan.sakib.buet</a>
+        <a class="card" href="https://github.com/safwansakib" target="_blank"><span class="cico">⌥</span> github.com/safwansakib</a>
+      </div>
+      <div style="margin-top:22px;">
+        <div class="sl" style="margin-bottom:11px;">Address</div>
+        <div class="addb card">House #15/1, Road #02<br>Ali and Noor Real Estate<br>Mohammadpur, Dhaka, Bangladesh</div>
+      </div>
+    </div>
+    <div>
+      <div class="rfl">Academic References</div>
+      <div class="rfc card rv"><div class="rfn">Dr. Mohammad Ali</div><div class="rft">Academic Advisor · Professor, ME Dept, BUET</div><div class="rfct">📞 <a href="tel:+8801732194776">+8801732194776</a><br>✉ <a href="mailto:mali@me.buet.ac.bd">mali@me.buet.ac.bd</a></div></div>
+      <div class="rfc card rv"><div class="rfn">Dr. Md. Ashiqur Rahman</div><div class="rft">Professor, ME Dept, BUET</div><div class="rfct">📞 <a href="tel:+8801712274887">+8801712274887</a><br>✉ <a href="mailto:ashiqurrahman@me.buet.ac.bd">ashiqurrahman@me.buet.ac.bd</a></div></div>
+      <div class="rfc card rv"><div class="rfn">Dr. Kazi Arafat Rahman</div><div class="rft">Thesis Supervisor · Associate Professor, ME Dept, BUET</div><div class="rfct">📞 <a href="tel:+8801311946837">+8801311946837</a><br>✉ <a href="mailto:karahman@me.buet.ac.bd">karahman@me.buet.ac.bd</a></div></div>
+    </div>
+  </div>
+</div>
+<footer><span class="fc">© 2026 Safwan Sakib</span><span class="fn">BUET MECHANICAL ENGINEERING</span></footer>
+</div>
+
+<script>
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(a);})();
+
+const html=document.documentElement,tgl=document.getElementById('tgl'),tlbl=document.getElementById('tlbl');
+function setTheme(t){html.dataset.theme=t;tlbl.textContent=t==='dark'?'Dark':'Light';localStorage.setItem('theme',t);}
+tgl.addEventListener('click',()=>setTheme(html.dataset.theme==='dark'?'light':'dark'));
+const saved=localStorage.getItem('theme');if(saved)setTheme(saved);
+
+const PAGES=['home','about','experience','research','projects','publications','awards','skills','contact'];
+let cp='home';
+function go(id){
+  if(!PAGES.includes(id)||id===cp)return;
+  const old=document.getElementById('p-'+cp);
+  old.classList.remove('visible');
+  setTimeout(()=>old.classList.remove('active'),320);
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  const nb=document.getElementById('n-'+id);if(nb)nb.classList.add('active');
+  cp=id;
+  const next=document.getElementById('p-'+id);
+  next.classList.add('active');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{next.classList.add('visible');window.scrollTo({top:0,behavior:'smooth'});rev(next);}));
+}
+function rev(pg){
+  const els=pg.querySelectorAll('.rv');
+  els.forEach(e=>e.classList.remove('on'));
+  setTimeout(()=>{
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});},{threshold:0.06});
+    els.forEach(e=>obs.observe(e));
+  },60);
+}
+(function init(){
+  const s=document.getElementById('p-home');
+  s.classList.add('active');
+  document.getElementById('n-home').classList.add('active');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{s.classList.add('visible');rev(s);}));
+})();
+</script>
+</body>
+</html>
